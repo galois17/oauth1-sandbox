@@ -1,0 +1,19 @@
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env
+
+# Certificates (CRITICAL: Do not commit these)
+*.pem
+*.key
+*.crt
+certs/
+
+# IDE settings
+.vscode/
+.idea/
+.DS_Store
+
