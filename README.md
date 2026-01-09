@@ -29,6 +29,6 @@ https://127.0.0.1.nip.io:9090
 
 (Note: We use nip.io to force DNS resolution to localhost while appearing as a "real" domain to satisfy strict OAuth libraries.)
 
-### The client key and secret is hardcoded with these example values. I will move it out at a later time-- e.g., pass the client key and secret as an argument when running the docker image
+#### The client key and secret is hardcoded with these example values. I will move it out at a later time-- e.g., pass the client key and secret as an argument when running the docker image
 CLIENT_KEY =    "ClientKeyMustBeLongEnough00001" 
 CLIENT_SECRET = "ClientSecretMustBeLongEnough01"
