@@ -34,3 +34,7 @@ https://127.0.0.1.nip.io:9090
 CLIENT_KEY =    "ClientKeyMustBeLongEnough00001" 
 CLIENT_SECRET = "ClientSecretMustBeLongEnough01"
 ```
+
+
+## License
+This project is open source and available under the [MIT License](LICENSE).
