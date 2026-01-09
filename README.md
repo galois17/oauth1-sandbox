@@ -4,7 +4,7 @@ Oauth 1.0a is notoriously hard to play with as there are limited public APIs ava
 
 This is a standalone, Dockerized OAuth 1.0a Provider designed for debugging and testing clients.
 
-It features **"Nuclear Debug Logging"** to help you solve signature mismatches by printing the exact Base String the server is expecting.
+I went crazy with Debug Logging to help you solve signature mismatches by printing the exact Base String the server is expecting.
 
 ## Features
 -  **Full Docker Support:** One command to run.
