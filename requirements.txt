@@ -1,0 +1,6 @@
+fastapi==0.109.0
+uvicorn==0.27.0
+oauthlib==3.2.2
+python-multipart
+requests
+requests-oauthlib
