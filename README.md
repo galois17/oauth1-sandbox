@@ -36,6 +36,7 @@ CLIENT_SECRET = "ClientSecretMustBeLongEnough01"
 ```
 
 
+<<<<<<< HEAD
 
 
 ##  Running the Sample Clients
@@ -102,3 +103,7 @@ Key:    ClientKeyMustBeLongEnough00001
    > OAuth Token:  sG06Yas6dJeMKPSr15Xa8lPypHTE65
    > OAuth Secret: gMtQB7lvKCuuBYAXhCOqeNYJcqL1My
 ```
+=======
+## License
+This project is open source and available under the [MIT License](LICENSE).
+>>>>>>> 78a86329e662c51d608bcf77f0491b7fe0f15158
