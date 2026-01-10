@@ -35,10 +35,6 @@ CLIENT_KEY =    "ClientKeyMustBeLongEnough00001"
 CLIENT_SECRET = "ClientSecretMustBeLongEnough01"
 ```
 
-
-<<<<<<< HEAD
-
-
 ##  Running the Sample Clients
 
 This repository includes working clients for Ruby and Python to help you test the server immediately.
@@ -106,4 +102,4 @@ Key:    ClientKeyMustBeLongEnough00001
 =======
 ## License
 This project is open source and available under the [MIT License](LICENSE).
->>>>>>> 78a86329e662c51d608bcf77f0491b7fe0f15158
+
