@@ -34,3 +34,71 @@ https://127.0.0.1.nip.io:9090
 CLIENT_KEY =    "ClientKeyMustBeLongEnough00001" 
 CLIENT_SECRET = "ClientSecretMustBeLongEnough01"
 ```
+
+
+
+
+##  Running the Sample Clients
+
+This repository includes working clients for Ruby and Python to help you test the server immediately.
+
+### Option A: Ruby Client
+This client is pre-configured to handle the self-signed SSL certificate automatically.
+
+```bash
+cd clients/ruby
+bundle install
+ruby client.rb
+```
+
+### Option B: Python Client
+A simple requests-based client that demonstrates how to suppress SSL warnings for local development.
+
+```bash
+cd clients/python
+pip install -r requirements.txt
+python client.py
+
+```
+
+## See It In Action
+
+Here is an actual run of the Ruby client against the Docker server.
+
+Notice how the **Server Logs** (top) print the exact incoming headers and signature verification steps—this is the "Nuclear Debugging" feature that makes fixing client bugs easy.
+
+### 1. Server Output (Docker Logs)
+```text
+==================================================
+      INCOMING REQUEST (NUCLEAR DEBUG)
+==================================================
+URL (Internal):  [https://127.0.0.1.nip.io:9090/oauth/request_token](https://127.0.0.1.nip.io:9090/oauth/request_token)
+Method:          POST
+Headers:         {'accept-encoding': 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'accept': '*/*', 'user-agent': 'OAuth gem v1.1.3', 'Authorization': 'OAuth oauth_callback="oob", oauth_consumer_key="ClientKeyMustBeLongEnough00001", ...'}
+Body:            ''
+==================================================
+
+[DEBUG] enforce_ssl check: True
+[DEBUG] check_nonce: 'tT6alHRVKjgZCn3S853kuGOxax5rTlazcbgxjPunbc' -> ALLOWED (Format ignored)
+[DEBUG] validate_timestamp_and_nonce: TS=1768065880 | Nonce=tT6alHRVKjgZCn3S853kuGOxax5rTlazcbgxjPunbc
+[SEC] Timestamp & Nonce Valid. Cached.
+[DEBUG] validate_client_key: 'ClientKeyMustBeLongEnough00001'
+[DEBUG] validate_redirect_uri: oob
+[DEBUG] get_client_secret for: ClientKeyMustBeLongEnough00001
+[DEBUG] save_request_token: {'oauth_token': 'sG06Yas6dJeMKPSr15Xa8lPypHTE65', ...}
+INFO:      192.168.65.1:36881 - "POST /oauth/request_token HTTP/1.1" 200 OK
+```
+
+### 2. Client Output (Ruby)
+
+```text
+--- RUBY CLIENT STARTING ---
+Target: [https://127.0.0.1.nip.io:9090](https://127.0.0.1.nip.io:9090)
+Key:    ClientKeyMustBeLongEnough00001
+
+[ACTION] Requesting Token...
+
+[SUCCESS] 🚀 Server Responded!
+   > OAuth Token:  sG06Yas6dJeMKPSr15Xa8lPypHTE65
+   > OAuth Secret: gMtQB7lvKCuuBYAXhCOqeNYJcqL1My
+```
