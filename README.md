@@ -67,37 +67,45 @@ Notice how the **Server Logs** (top) print the exact incoming headers and signat
 ### 1. Server Output (Docker Logs)
 ```text
 ==================================================
-      INCOMING REQUEST (NUCLEAR DEBUG)
+      INCOMING POST REQUEST
 ==================================================
-URL (Internal):  [https://127.0.0.1.nip.io:9090/oauth/request_token](https://127.0.0.1.nip.io:9090/oauth/request_token)
-Method:          POST
-Headers:         {'accept-encoding': 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'accept': '*/*', 'user-agent': 'OAuth gem v1.1.3', 'Authorization': 'OAuth oauth_callback="oob", oauth_consumer_key="ClientKeyMustBeLongEnough00001", ...'}
-Body:            ''
+URL:     https://127.0.0.1.nip.io:9090/oauth/access_token
+Headers: {'accept-encoding': 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'accept': '*/*', 'user-agent': 'OAuth gem v1.1.3', 'content-length': '0', 'Authorization': 'OAuth oauth_consumer_key="ClientKeyMustBeLongEnough00001", oauth_nonce="891MkTg6Yigf2ruZzZ0LlYYPzv1NtOtOfGzODq4PRw", oauth_signature="rM3vYS5kg7P8hGdderS6Vx%2FIFVg%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1768078757", oauth_token="BxmQenbHjYK7Mm8PREES8bqyMd3YXA", oauth_verifier="804209", oauth_version="1.0"', 'connection': 'close', 'host': '127.0.0.1.nip.io:9090'}
+Body:
 ==================================================
 
-[DEBUG] enforce_ssl check: True
-[DEBUG] check_nonce: 'tT6alHRVKjgZCn3S853kuGOxax5rTlazcbgxjPunbc' -> ALLOWED (Format ignored)
-[DEBUG] validate_timestamp_and_nonce: TS=1768065880 | Nonce=tT6alHRVKjgZCn3S853kuGOxax5rTlazcbgxjPunbc
-[SEC] Timestamp & Nonce Valid. Cached.
-[DEBUG] validate_client_key: 'ClientKeyMustBeLongEnough00001'
-[DEBUG] validate_redirect_uri: oob
-[DEBUG] get_client_secret for: ClientKeyMustBeLongEnough00001
-[DEBUG] save_request_token: {'oauth_token': 'sG06Yas6dJeMKPSr15Xa8lPypHTE65', ...}
-INFO:      192.168.65.1:36881 - "POST /oauth/request_token HTTP/1.1" 200 OK
+[DEBUG] check_nonce: '891MkTg6Yigf2ruZzZ0LlYYPzv1NtOtOfGzODq4PRw' -> ALLOWED
+[DEBUG] check_verifier: '804209' -> ALLOWED
+[DEBUG] Validating Verifier: Client says '804209' vs Stored '804209'
+[STORE] Issuing Access Token: {'oauth_token': 'CVmmJ9f3hUq7zGhvC3ORTltvMKCvvH', 'oauth_token_secret': 'ZhpJogoM43W0BWwtCTLz8D6kqEYSKe', 'oauth_authorized_realms': ''}
+[STORE] Invalidating (Burning) Request Token: BxmQenbHjYK7Mm8PREES8bqyMd3YXA
+INFO:     192.168.65.1:26189 - "POST /oauth/access_token HTTP/1.1" 200 OK
 ```
 
 ### 2. Client Output (Ruby)
 
 ```text
---- RUBY CLIENT STARTING ---
-Target: [https://127.0.0.1.nip.io:9090](https://127.0.0.1.nip.io:9090)
-Key:    ClientKeyMustBeLongEnough00001
+--- RUBY CLIENT (FULL FLOW) ---
+Target: https://127.0.0.1.nip.io:9090
 
-[ACTION] Requesting Token...
+[STEP 1] Requesting Temporary Token...
+   > Token:  BxmQenbHjYK7Mm8PREES8bqyMd3YXA
+   > Secret: 3YMxYoeaYoSq7mC1qlQOeZ2D6HJ9Tr
 
-[SUCCESS] 🚀 Server Responded!
-   > OAuth Token:  sG06Yas6dJeMKPSr15Xa8lPypHTE65
-   > OAuth Secret: gMtQB7lvKCuuBYAXhCOqeNYJcqL1My
+[STEP 2] User Authorization
+   > ---------------------------------------------------------
+   > OPEN THIS URL IN YOUR BROWSER:
+   > https://127.0.0.1.nip.io:9090/oauth/authorize?oauth_token=BxmQenbHjYK7Mm8PREES8bqyMd3YXA
+   > ---------------------------------------------------------
+   (The server will show you a 6-digit PIN code. Enter it below.)
+   > PIN Code: 804209
+
+[STEP 3] Exchanging for Access Token...
+
+[SUCCESS] 🚀 OAuth Flow Complete!
+   > FINAL Access Token:  CVmmJ9f3hUq7zGhvC3ORTltvMKCvvH
+   > FINAL Access Secret: ZhpJogoM43W0BWwtCTLz8D6kqEYSKe
+   > You can now use this token to access protected API endpoints.
 ```
 =======
 ## License
